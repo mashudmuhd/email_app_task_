@@ -11,7 +11,6 @@ class HomeScreen extends GetView<EmailController>{
 
   @override
   Widget build(BuildContext context) {
-    final EmailController emailController = Get.put(EmailController());
     return Scaffold(
         body: SingleChildScrollView(
           child: Column(
@@ -57,7 +56,7 @@ class HomeScreen extends GetView<EmailController>{
               ),
           ),
             ),
-              getBody(emailController),
+              getBody(),
             ],
           ),
         )
@@ -68,53 +67,72 @@ class HomeScreen extends GetView<EmailController>{
 
 
 //Here is Body with email static email list
-  Widget getBody(EmailController emailController) {
-    return Obx(() =>ListView.separated(
-      shrinkWrap: true,
-         physics: const BouncingScrollPhysics(),
-         itemCount: emailController.emailBody.length,
-         separatorBuilder: (BuildContext context, int index) => const SizedBox(),
-         itemBuilder: (BuildContext context, int index) {
+  Widget getBody() {
+    final EmailController emailController = Get.put(EmailController());
+    return GetBuilder<EmailController>(
+      builder: (controller) {
+        return ListView.builder(
+          shrinkWrap: true,
+          physics: const BouncingScrollPhysics(),
+          itemCount: emailController.emailBody.length,
+          itemBuilder: (BuildContext context, int index) {
+            final email = emailController.emailBody[index].emailId;
+            final emailBody = emailController.emailBody[index].emailBody;
+            final emailSubject = emailController.emailBody[index].subject;
+            final isStarred = emailController.isStarred(index);
 
-           var email = emailController.emailBody[index].emailId;
-           var emailBody = emailController.emailBody[index].emailBody;
-           var emailSubject = emailController.emailBody[index].subject;
-           final isStarred = emailController.starredMail.value.contains(emailBody);
+            Map<String, dynamic> arguments = {
+              "email": email,
+              "emailBody": emailBody,
+              "subject": emailSubject,
+            };
 
-           Map<String , dynamic> arguments = {"email":email,"emailBody":emailBody,"subject":emailSubject};
-           return Padding(
-             padding: const EdgeInsets.all(8.0),
-             child: ListTile(
-               leading: getProfileWithInitialLetter(text: email),
-               title:   Column(
-                 crossAxisAlignment: CrossAxisAlignment.start,
-                 children: [
-                   getRegularBodyText(text: splitNameEmail(email),fontWeight: FontWeight.bold),
-                   getRegularBodyText(text: emailSubject,fontSize: 13.0)
-                 ],
-               ),
-               trailing: Column(
-                 children: [
-                   getRegularBoldText(text: "Sep 30 ",fontWeight: FontWeight.bold),
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ListTile(
+                leading: getProfileWithInitialLetter(text: email),
+                title: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    getRegularBodyText(
+                      text: splitNameEmail(email),
+                      fontWeight: FontWeight.bold,
+                    ),
+                    getRegularBodyText(
+                      text: emailSubject,
+                      fontSize: 13.0,
+                    ),
+                  ],
+                ),
+                trailing: Column(
+                  children: [
+                    getRegularBoldText(
+                      text: "Sep 30 ",
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15.0
+                    ),
                     InkWell(
-                      onTap: (){
-                        if(isStarred){
-                          emailController.removeStarList(emailBody);
-                        }
-                        else{
-                          emailController.addStarList(emailBody);
-                        }
+                      onTap: () {
+                        print('Star icon tapped for index $index');
+                        emailController.toggleStarIcon(index);
                       },
-                        child: Icon(isStarred?Icons.star:Icons.star_border,color: isStarred?Colors.yellow:Colors.grey))
-                 ],
-               ),
-               onTap: () => Get.toNamed(Routes.EMAILBODY_SCREEN,arguments:arguments),
-             ),
-           );
-
-         },
-       ));
+                      child: Icon(
+                        isStarred ? Icons.star : Icons.star_border,
+                        color: isStarred ? Colors.yellow : Colors.grey,
+                      ),
+                    ),
+                  ],
+                ),
+                onTap: () =>
+                    Get.toNamed(Routes.EMAILBODY_SCREEN, arguments: arguments),
+              ),
+            );
+          },
+        );
+      },
+    );
   }
+
 }
 
 getCustomSearchBar(){

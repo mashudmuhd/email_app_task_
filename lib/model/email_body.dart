@@ -1,4 +1,5 @@
 class EmailBody{
+
   final String emailBody;
  final String emailId;
   final String subject;

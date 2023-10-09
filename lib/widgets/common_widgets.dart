@@ -4,8 +4,8 @@ import '../screens/common_methords.dart';
 
 
 //common text with following properties
-Text getRegularBodyText({text, fontWeight,fontSize}){
-  return Text(text,style: TextStyle(fontSize:fontSize?? 18.0,fontWeight: fontWeight,overflow:TextOverflow.ellipsis),);
+Text getRegularBodyText({text, fontWeight,fontSize,fontColor,textAlign}){
+  return Text(text,style: TextStyle(fontSize:fontSize?? 18.0,fontWeight: fontWeight,overflow:TextOverflow.ellipsis,color: fontColor??Colors.black,),textAlign: textAlign,);
 }
 
 Text getRegularBoldText({text, fontWeight, fontSize, fontStyle,fontColor}){
@@ -24,6 +24,8 @@ SizedBox getWidth({width}){
 }
 
 Widget getProfileWithInitialLetter({text}){
-  return CircleAvatar(backgroundColor: Colors.orange,
+  return CircleAvatar(
+      radius: 30,
+      backgroundColor: Colors.orange,
   child: getRegularBoldText(text: getEmailInitials(text), fontColor: Colors.white));
 }

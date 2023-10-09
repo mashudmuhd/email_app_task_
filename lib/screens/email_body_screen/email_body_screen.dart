@@ -1,3 +1,4 @@
+import 'package:email_app_task/widgets/thank_you_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -12,7 +13,6 @@ class EmailBodyUI extends GetView<EmailController>{
   @override
   Widget build(BuildContext context) {
     final emailController = Get.find<EmailController>();
-
     Map<String,dynamic>arguments = Get.arguments;
     String email = arguments['email'];
     String emailBody = arguments['emailBody'];
@@ -63,19 +63,21 @@ class EmailBodyUI extends GetView<EmailController>{
         children: [
           getEmailHeader(emailController,email,emailBody,emailSubject),
           getHeight(height: 20.0),
-          GetBuilder<EmailController>(builder:(controller){
-            return WebView(
-              initialUrl: emailBody??"",
-              javascriptMode: JavascriptMode.unrestricted,
-            );
+          const SizedBox(
+            height: 400,
+            // child: WebView(
+            //   initialUrl: 'asset:///assets/your_html_file.html',
+            //   javascriptMode: JavascriptMode.unrestricted,
+            // )
 
-          })
+            child: ThankYouPage(),
+
+          ),
 
         ]
       ),
     );
   }
-
 
 //Email Header with profile and subject
   Widget getEmailHeader(EmailController emailController,email,emailBody,subject) {
@@ -83,7 +85,6 @@ class EmailBodyUI extends GetView<EmailController>{
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         getRegularBoldText(text: subject.toUpperCase(), fontSize: 20.0),
-
         Padding(
           padding:  const EdgeInsets.only(top: 30),
           child: Row(
@@ -102,7 +103,7 @@ class EmailBodyUI extends GetView<EmailController>{
                         const Icon(Icons.expand_more)
                       ],
                     ),
-                    onTap: () => emailController.copyTOClipBoard(email, email),
+                    onTap: () => emailController.copyToClipboard(email, email),
                   ),
                 ],
               ),

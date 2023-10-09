@@ -6,37 +6,50 @@ import 'package:webview_flutter/webview_flutter.dart';
 import '../constants.dart';
 import '../model/email_model.dart';
 
-class EmailController extends GetxController{
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+
+import '../constants.dart';
+import '../model/email_body.dart';
+
+class EmailController extends GetxController {
   RxList<EmailBody> emailBody = RxList<EmailBody>();
-  RxList<String> starredMail =<String>[].obs;
+  RxList<int> starredMail = <int>[].obs;
   late WebViewController controller;
+  List<RxBool> isStarredList = [];
 
   @override
   void onInit() {
-   emailBody.addAll({
-     EmailBody(emailBody: happiloMailbody, emailId: 'happillo@happilo.com', subject: 'Thank you for your purchase'),
-     EmailBody(emailBody: hopscotchMailBody, emailId: 'hopscotch@hopscotch.com', subject: 'Order Shipped'),
-     EmailBody(emailBody: noiseMailBody, emailId: 'noise@noise.com', subject: 'Thank you for placing order with us'),
+    emailBody.addAll({
+      EmailBody(emailBody: happiloMailbody, emailId: 'happillo@happilo.com', subject: 'Thank you for your purchase'),
+      EmailBody(emailBody: hopscotchMailBody, emailId: 'hopscotch@hopscotch.com', subject: 'Order Shipped'),
+      EmailBody(emailBody: noiseMailBody, emailId: 'noise@noise.com', subject: 'Thank you for placing an order with us'),
+    });
 
-   });
-
+    for (int i = 0; i < emailBody.length; i++) {
+      isStarredList.add(false.obs);
+    }
 
     super.onInit();
   }
 
-  void addStarList(String item){
-    starredMail.value.add(item);
+  void toggleStarIcon(int index) {
+    if (starredMail.contains(index)) {
+      starredMail.remove(index);
+    } else {
+      starredMail.add(index);
+    }
+    isStarredList[index].value = !isStarredList[index].value;
+    update();
   }
 
-  void removeStarList(String item){
-    starredMail.value.remove(item);
-    print(starredMail);
-
+  bool isStarred(int index) {
+    return starredMail.contains(index);
   }
 
-  void copyTOClipBoard(String text,String email){
+  void copyToClipboard(String text, String email) {
     Clipboard.setData(ClipboardData(text: text));
     Get.snackbar("Copied", email);
   }
-
 }
