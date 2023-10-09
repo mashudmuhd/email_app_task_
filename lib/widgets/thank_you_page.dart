@@ -31,24 +31,22 @@ class ThankYouPage extends StatelessWidget {
                    text: "Hi Sparks, we're getting your order ready to be shipped. We will notify you when it has been sent.",
                       fontSize: 16.0,
                       fontColor: Colors.grey,
-
                   ),
                   getHeight(height: 20.0),
                   ElevatedButton(
                     onPressed: () {
-                      // Add your action when the button is pressed.
                     },
                     child: getRegularBodyText(text: 'View your order'),
                   ),
                   getHeight(height: 10.0),
-                  Text(
-                    'or',
+                  getRegularBodyText(
+                    text: 'or',
                     textAlign: TextAlign.center,
                   ),
                   getHeight(height: 10.0),
                   ElevatedButton(
                     onPressed: () {
-                      // Add your action when the button is pressed.
+
                     },
                     child: getRegularBodyText(text: 'Visit our store'),
                   ),
@@ -173,26 +171,20 @@ class OrderSummaryItem extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          title,
-          style: TextStyle(
-            fontSize: 16,
-          ),
+        getRegularBodyText(
+         text: title,
+            fontSize: 16.0,
         ),
-        SizedBox(height: 5),
-        Text(
-          variant,
-          style: TextStyle(
-            color: Colors.grey,
-          ),
+        getHeight(height: 5.0),
+        getRegularBodyText(
+         text :variant,
+            fontColor: Colors.grey,
         ),
-        SizedBox(height: 5),
-        Text(
-          price,
-          style: TextStyle(
-            fontSize: 16,
+        getHeight(height: 5.0),
+        getRegularBodyText(
+          text:price,
+            fontSize: 16.0,
             fontWeight: FontWeight.bold,
-          ),
         ),
       ],
     );
@@ -215,19 +207,16 @@ class OrderSummaryRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          title,
-          style: TextStyle(
-            fontSize: 16,
+        getRegularBodyText(
+         text: title,
+            fontSize: 16.0,
             fontWeight: isTotal ? FontWeight.bold : FontWeight.normal,
-          ),
+
         ),
-        Text(
-          value,
-          style: TextStyle(
-            fontSize: 16,
+        getRegularBodyText(
+        text:  value,
+            fontSize: 16.0,
             fontWeight: isTotal ? FontWeight.bold : FontWeight.normal,
-          ),
         ),
       ],
     );
@@ -248,19 +237,16 @@ class CustomerInfoRow extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          title,
-          style: TextStyle(
-            fontSize: 16,
-          ),
+        getRegularBodyText(
+         text: title,
+            fontSize: 16.0,
         ),
-        SizedBox(height: 5),
-        Text(
-          value,
-          style: TextStyle(
-            fontSize: 16,
+        getHeight(height: 5.0),
+        getRegularBodyText(
+          text:value,
+            fontSize: 16.0,
             fontWeight: FontWeight.bold,
-          ),
+
         ),
       ],
     );

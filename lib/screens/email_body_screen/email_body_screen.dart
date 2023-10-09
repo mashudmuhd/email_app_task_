@@ -57,25 +57,18 @@ class EmailBodyUI extends GetView<EmailController>{
   //Email content  body
   Widget getEmailContent(EmailController emailController,email,emailBody,emailSubject) {
     print(emailBody);
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          getEmailHeader(emailController,email,emailBody,emailSubject),
-          getHeight(height: 20.0),
-          const SizedBox(
-            height: 400,
-            // child: WebView(
-            //   initialUrl: 'asset:///assets/your_html_file.html',
-            //   javascriptMode: JavascriptMode.unrestricted,
-            // )
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        getEmailHeader(emailController,email,emailBody,emailSubject),
+        getHeight(height: 20.0),
+         Expanded(
+           child: WebViewWidget(
+             controller: emailController.webViewController,
+           ),
+         ),
 
-            child: ThankYouPage(),
-
-          ),
-
-        ]
-      ),
+      ]
     );
   }
 

@@ -35,10 +35,12 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  webview_flutter: ^2.0.14
   shared_preferences: ^2.2.1
   material_floating_search_bar_2: ^0.5.0
   get: ^4.6.6
+  webview_flutter: ^4.4.1
+
+
 
 dev_dependencies:
   flutter_test:
@@ -62,6 +64,8 @@ flutter:
   uses-material-design: true
   assets:
     - assets/mailbody1.html
+    - assets/mailbody2.html
+    - assets/mailbody3.html
 
   # To add assets to your application, add an assets section, like this:
   # assets:

@@ -9,6 +9,6 @@ const recipientNameTemp = 'Dear ${"recipientName"},';
 
 //Weburls
 
-const happiloMailbody = "assets/html_pages/mailbody1.html";
-const hopscotchMailBody = "assets/html_pages/mailbody2.html";
-const noiseMailBody = "assets/html_pages/mailbody3.html";
+const happiloMailbody = "assets/mailbody1.html";
+const hopscotchMailBody = "assets/mailbody2.html";
+const noiseMailBody = "assets/mailbody3.html";

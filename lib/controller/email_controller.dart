@@ -8,16 +8,16 @@ import '../model/email_model.dart';
 
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 import '../constants.dart';
 import '../model/email_body.dart';
 
+
 class EmailController extends GetxController {
   RxList<EmailBody> emailBody = RxList<EmailBody>();
   RxList<int> starredMail = <int>[].obs;
-  late WebViewController controller;
   List<RxBool> isStarredList = [];
+  late final WebViewController webViewController;
 
   @override
   void onInit() {
@@ -31,8 +31,15 @@ class EmailController extends GetxController {
       isStarredList.add(false.obs);
     }
 
+
+    webViewController =WebViewController();
+    webViewController.loadFlutterAsset(hopscotchMailBody);
     super.onInit();
   }
+
+
+
+
 
   void toggleStarIcon(int index) {
     if (starredMail.contains(index)) {

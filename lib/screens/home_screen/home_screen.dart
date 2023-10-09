@@ -8,7 +8,6 @@ import '../../widgets/common_widgets.dart';
 import '../common_methords.dart';
 class HomeScreen extends GetView<EmailController>{
   const HomeScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +38,7 @@ class HomeScreen extends GetView<EmailController>{
                     IconButton(
                       icon: const Icon(Icons.menu),
                       onPressed: () {
-                        // Add your search functionality here
+
                       },
                     ),
                     const Expanded(
@@ -137,7 +136,7 @@ class HomeScreen extends GetView<EmailController>{
 
 getCustomSearchBar(){
   Container(
-    width: 300, // Adjust the width as needed
+    width: 300,
     decoration: BoxDecoration(
       color: Colors.white,
       borderRadius: BorderRadius.circular(30), // Rounded corners
@@ -155,7 +154,7 @@ getCustomSearchBar(){
         IconButton(
           icon: const Icon(Icons.search),
           onPressed: () {
-            // Add your search functionality here
+
           },
         ),
         const Expanded(
