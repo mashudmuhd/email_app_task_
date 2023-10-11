@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "name": "Alice",
+    "age": 25,
+    "gender": "Female",
+    "occupation": "Software Engineer"
+  },
+  {
+    "id": 2,
+    "name": "Bob",
+    "age": 30,
+    "gender": "Male",
+    "occupation": "Data Scientist"
+  },
+  {
+    "id": 3,
+    "name": "Carol",
+    "age": 28,
+    "gender": "Female",
+    "occupation": "Product Manager"
+  },
+  {
+    "id": 4,
+    "name": "David",
+    "age": 32,
+    "gender": "Male",
+    "occupation": "Marketing Manager"
+  },
+  {
+    "id": 5,
+    "name": "Eve",
+    "age": 26,
+    "gender": "Female",
+    "occupation": "UX Designer"
+  }
+]

@@ -1,7 +1,6 @@
 import 'package:email_app_task/widgets/thank_you_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 import '../../constants.dart';
 import '../../controller/email_controller.dart';
 import '../../widgets/common_widgets.dart';
@@ -35,16 +34,13 @@ class EmailBodyUI extends GetView<EmailController>{
             )
           ],
         ),
-        body: InteractiveViewer(
-          minScale: 0.5,
-          maxScale: 2.0,
-          child: getBody(emailController,email,emailBody,emailSubject))
+        // body: InteractiveViewer(
+        //   minScale: 0.5,
+        //   maxScale: 2.0,
+        //   child: getBody(emailController,email,emailBody,emailSubject))
 
     );
   }
-
-
-
   //Email MainBody
   Widget getBody(EmailController emailController,email,emailBody,emailSubject) {
     return Padding(
@@ -56,17 +52,16 @@ class EmailBodyUI extends GetView<EmailController>{
 
   //Email content  body
   Widget getEmailContent(EmailController emailController,email,emailBody,emailSubject) {
-    print(emailBody);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         getEmailHeader(emailController,email,emailBody,emailSubject),
         getHeight(height: 20.0),
-         Expanded(
-           child: WebViewWidget(
-             controller: emailController.webViewController,
-           ),
-         ),
+         // Expanded(
+         //   child: WebViewWidget(
+         //     controller: emailController.webViewController,
+         //   ),
+         // ),
 
       ]
     );

@@ -15,50 +15,79 @@ class HomeScreen extends GetView<EmailController>{
           child: Column(
             children: [
               getHeight(height: 40.0),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-              width: double.maxFinite, // Adjust the width as needed
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10), // Rounded corners
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 3,
-                    blurRadius: 5,
-                    offset: Offset(0, 3), //   Shadow position
-                  ),
-                ],
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons.menu),
-                      onPressed: () {
-
-                      },
-                    ),
-                    const Expanded(
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Search',
-                          border: InputBorder.none, // Hide the border
-                        ),
-                      ),
-                    ),
-                    const CircleAvatar()
-                  ],
-                ),
-              ),
-          ),
-            ),
+            getSearchBar(),
               getBody(),
             ],
           ),
         )
+    );
+  }
+
+  Widget getSearchBar() {
+    return Stack(
+      children: [
+        Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                width: double.maxFinite, // Adjust the width as needed
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10), // Rounded corners
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 3,
+                      blurRadius: 5,
+                      offset: Offset(0, 3), //   Shadow position
+                    ),
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.menu),
+                        onPressed: () {
+
+                        },
+                      ),
+                       Expanded(
+                        child: TextField(
+                          onChanged:controller.searchItem,
+                          decoration: const InputDecoration(
+                            hintText: 'Search',
+                            border: InputBorder.none, // Hide the border
+                          ),
+                        ),
+                      ),
+                      const CircleAvatar()
+                    ],
+                  ),
+                ),
+            ),
+              ),
+
+        Obx(() => controller.searchQuery.isNotEmpty?Padding(
+          padding:  const EdgeInsets.only(top: 70),
+          child: Expanded(
+            child: Padding(
+              padding:  const EdgeInsets.symmetric(horizontal: 30),
+              child: ListView.separated(
+                shrinkWrap: true,
+                itemCount: controller.filteredList.length,
+                separatorBuilder: (BuildContext context, int index) => const Divider(),
+                itemBuilder: (BuildContext context, int index) {
+                  return ListTile(
+                    focusColor: Colors.grey,
+                    title: Text( controller.filteredList[index].emailId),
+                  );
+                },
+              ),
+            ),
+          ),
+        ):const SizedBox())
+      ],
     );
   }
 
@@ -122,8 +151,7 @@ class HomeScreen extends GetView<EmailController>{
                     ),
                   ],
                 ),
-                onTap: () =>
-                    Get.toNamed(Routes.EMAILBODY_SCREEN, arguments: arguments),
+                onTap: ()=>Get.toNamed(Routes.EMAILBODY_SCREEN, arguments: arguments),
               ),
             );
           },
@@ -134,38 +162,3 @@ class HomeScreen extends GetView<EmailController>{
 
 }
 
-getCustomSearchBar(){
-  Container(
-    width: 300,
-    decoration: BoxDecoration(
-      color: Colors.white,
-      borderRadius: BorderRadius.circular(30), // Rounded corners
-      boxShadow: [
-        BoxShadow(
-          color: Colors.grey.withOpacity(0.5),
-          spreadRadius: 3,
-          blurRadius: 5,
-          offset: const Offset(0, 3), // Shadow position
-        ),
-      ],
-    ),
-    child: Row(
-      children: [
-        IconButton(
-          icon: const Icon(Icons.search),
-          onPressed: () {
-
-          },
-        ),
-        const Expanded(
-          child: TextField(
-            decoration: InputDecoration(
-              hintText: 'Search',
-              border: InputBorder.none, // Hide the border
-            ),
-          ),
-        ),
-      ],
-    ),
-  );
-}
